@@ -6,9 +6,7 @@ module Rakish
 Rakish::CppProject.new(
 	:name 			=> "artd-lib-logger",
 	:package 		=> "artd",
-	:id 			=> "6A9F2C14-564B-4817-86D1-E4877BEBC950", 
-	:dependsUpon 	=> [
-	]
+	:dependsUpon 	=> []
 ) do
 
 	cppDefine('BUILDING_artd_lib_logger');

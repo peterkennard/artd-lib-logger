@@ -27,9 +27,9 @@
 // the item for the level below is NOT defined.
 // If it is defined it must be defined as AD_LOG_NOOP
 
-#define CL_ENABLE_FULL_LOGGING
+#define AD_ENABLE_FULL_LOGGING
 
-#ifndef _DEBUG // release compile
+#ifndef ARTD_DEBUG // release compile
 
 #ifndef AD_ENABLE_FULL_LOGGING
 

@@ -162,6 +162,10 @@ public:
 	if(_logger_().isActive(::artd::Logger::log_level::level)) \
 		::artd::LineLogger(_logger_()).log_##level(method,file,line)
 
+#ifndef __PRETTY_FUNCTION__
+	#define __PRETTY_FUNCTION__ __FUNCTION__
+#endif
+
 #define AD_LOG_OUT(level) \
 	::artd::LineLogger(_logger_()).log_##level(&__PRETTY_FUNCTION__[0],&__FILE__[0],__LINE__)
 

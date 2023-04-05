@@ -162,16 +162,18 @@ public:
 	if(_logger_().isActive(::artd::Logger::log_level::level)) \
 		::artd::LineLogger(_logger_()).log_##level(method,file,line)
 
-#ifndef __PRETTY_FUNCTION__
-	#define __PRETTY_FUNCTION__ __FUNCTION__
+#if defined(_MSC_VER)
+    #define __ARTD_FUNCTION__ __FUNCTION__
+#else
+    #define __ARTD_FUNCTION__ __PRETTY_FUNCTION__
 #endif
 
 #define AD_LOG_OUT(level) \
-	::artd::LineLogger(_logger_()).log_##level(&__PRETTY_FUNCTION__[0],&__FILE__[0],__LINE__)
+	::artd::LineLogger(_logger_()).log_##level(&__ARTD_FUNCTION__[0],&__FILE__[0],__LINE__)
 
 #define AD_REALLY_LOG(level) \
 	if(_logger_().isActive(::artd::Logger::log_level::level)) \
-		::artd::LineLogger(_logger_()).log_##level(&__PRETTY_FUNCTION__[0],&__FILE__[0],__LINE__)
+		::artd::LineLogger(_logger_()).log_##level(&__ARTD_FUNCTION__[0],&__FILE__[0],__LINE__)
 
 #define AD_LOG_NOOP if(false) ::artd::LineLogger::NoopStream()
 
@@ -209,9 +211,9 @@ public:
 
 #define AD_LOG(level) AD_LOG_##level
 
-#if 0
+#if 0  // well nice idea but dosn't really work with namespaces used in namespaces !!
 inline Logger& _logger_() {
-	static Logger* mylog = LogManager::getLogger(&__FUNCTION__[0]);
+	static Logger* mylog = LogManager::getLogger(&__ARTD_FUNCTION__[0]);
 	return(*mylog);
 }
 #endif
@@ -219,7 +221,7 @@ inline Logger& _logger_() {
 }  // namespace artd
 
 inline ::artd::Logger& _logger_() {
-	static ::artd::Logger* mylog = ::artd::LogManager::getLogger(&__FUNCTION__[0]);
+	static ::artd::Logger* mylog = ::artd::LogManager::getLogger(&__ARTD_FUNCTION__[0]);
 	return(*mylog);
 }
 

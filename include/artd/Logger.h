@@ -155,17 +155,19 @@ public:
 
 // use the below macro like any ostream AD_LOG(info) << "a message, value = " << value;
 
+
+
 // This one is only used at present for the GLError wrapper
 #define AD_LOG_MFL(level,method,file,line) \
 	if(_logger_().isActive(::artd::Logger::log_level::level)) \
 		::artd::LineLogger(_logger_()).log_##level(method,file,line)
 
 #define AD_LOG_OUT(level) \
-	::artd::LineLogger(_logger_()).log_##level(&__FUNCTION__[0],&__FILE__[0],__LINE__)
+	::artd::LineLogger(_logger_()).log_##level(&__PRETTY_FUNCTION__[0],&__FILE__[0],__LINE__)
 
 #define AD_REALLY_LOG(level) \
 	if(_logger_().isActive(::artd::Logger::log_level::level)) \
-		::artd::LineLogger(_logger_()).log_##level(&__FUNCTION__[0],&__FILE__[0],__LINE__)
+		::artd::LineLogger(_logger_()).log_##level(&__PRETTY_FUNCTION__[0],&__FILE__[0],__LINE__)
 
 #define AD_LOG_NOOP if(false) ::artd::LineLogger::NoopStream()
 

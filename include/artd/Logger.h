@@ -132,10 +132,10 @@ public:
 	class NoopStream {
 	public:
 		template<class AnyObj>
-		inline NoopStream& operator << (const AnyObj& v) {
+		inline NoopStream& operator << (const AnyObj&) {
 			return(*this);
 		}
-		inline NoopStream& endl(NoopStream& os) {
+		inline NoopStream& endl(NoopStream&) {
 			return(*this);
 		}
 	};

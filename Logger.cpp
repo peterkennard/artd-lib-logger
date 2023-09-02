@@ -201,7 +201,11 @@ LineLogger::~LineLogger() {
 				}
 			}
 			if (lm.stdoutEnabled) {
-				std::cout << levelName(level_) << " " << pFileName << "(" << line_ << ") " << methodPath_ << " : " << cstr << std::endl;
+            #if 1 // intellij clickable format
+                std::cout << levelName(level_) << " " << methodPath_ << " : " << cstr << " (" << file_ << ":" << line_ << ")" << std::endl;
+            #else
+                std::cout << levelName(level_) << " " << pFileName << "(" << line_ << ") " << methodPath_ << " : " << cstr << std::endl;
+            #endif
 			}
 		}
 	}
